@@ -16,13 +16,73 @@
     <script type="text/javascript" src="/Public/js/base.js?ver=7.0.4"></script>
     <script type="text/javascript" src="/Public/js/signpop.js"></script>
     <script type="text/javascript" src="/Public/js/util.js"></script>
+	<link rel="stylesheet" type="text/css" href="/Public/css/Index/nav.css"/>
     <!--头部可以引入一些css和js-->
     <block name="head"></block>
 
 </head>
 
 <body>
-	<block name="content"></block>
+
+	<div class="pageheader">
+		<div class="container">
+			<h1>比较有个性的网址导航</h1>
+			<div class="note">看起来竟然有点风骚！</div>
+		</div>
+	</div>
+
+	<section class="container" id="navs">
+		<!--左边导航栏-->
+		<nav>
+			<ul class="affix-top">
+				<block name="leftContainerContent"></block>
+			</ul>
+		</nav>
+
+		<!--中间网址部分-->
+		<block name="centerLinks"></block>
+
+		<!--右边功能栏-->
+		<div class="function">
+			<!--我要推荐-->
+			<div id="recommand">
+				<div id="recommandTitle" data-status="hidden" style="cursor: pointer"><p>我要推荐网站</p></div>
+				<div id="recommandContent" style="display: none">
+					<p>你可以向全校同学推荐你认为优质的网站哦！</p>
+					<form action="/index/addRecommandedWeb" method="post">
+						<p><input type="text" name="name" class="form-control" placeholder="网站名称"></p>
+						<p><input type="text" name="link" class="form-control" placeholder="www.baidu.com"></p>
+						<p><input type="text" name="description" class="form-control" placeholder="网站描述"></p>
+						<p><input id="submitRecommand" type="submit" class="btn btn-default" value="推荐！"></p>
+					</form>
+				</div>
+			</div>
+			<!--发现-->
+			<div id="discover">
+				<div id="discoverTitle" data-status="hidden" style="cursor: pointer"><p>发掘一些美妙的网站</p></div>
+				<div id="discoverContent" style="display: none"><p><a href="http://www.jobdeer.com/?fr=4sjtu">卖萌又卖人的互联网人才拍卖网站 JobDeer.com</a></p></div>
+			</div>
+			<!--通知公告-->
+			<div id="notice">
+				<div id="noticeTitle" data-status="hidden" style="cursor: pointer"><p>公告</p></div>
+				<div id="noticeContent" style="display: none">
+					<p>当链接点击量达到一定，链接文本会变回本色。</p>
+					<p>我们坚信，导航能节约生命</p>
+				</div>
+
+			</div>
+
+			</textarea>
+		</div>
+	</section>
+
+
+
+	<footer class="footer">
+		<div class="container">
+			<p>©2014 <a href="http://www.4sjtu.com">交大导航</a> 让同学们上网更快 <a href="http://www.miitbeian.gov.cn/">沪ICP备14053719号</a></p>
+		</div>
+	</footer>
 </body>
 
 </html>

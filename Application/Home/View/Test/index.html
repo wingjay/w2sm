@@ -1,0 +1,33 @@
+<extend name="Template:template"/>
+
+
+<!--左边导航栏-->
+<block name="leftContainerContent">
+	<volist name="linkType" id="vo">
+		<li>
+			<a href="/test">{$vo.name}</a>
+		</li>
+	</volist>
+</block>
+
+
+<block name="centerLinks">
+	<div class="items">
+		<volist name="links" id="vo">
+			<div class="item">
+				<h2>{$vo.type}</h2>
+				<ul class="xoxo blogroll">
+					<volist name="vo['content']" id="link">
+						<li onclick="window.open('{$link.link}')">
+							<a title={$link.name} target="_blank" data-key={$link.color} class="linkName">
+								{$link.name}
+							</a>
+							<!--<br>-->
+							<!--{$link.description}-->
+						</li>
+					</volist>
+				</ul>
+			</div>
+		</volist>
+	</div>
+</block>

@@ -2,8 +2,8 @@
 namespace Home\Controller;
 use Think\Model;
 
-class IndexController extends BaseController {
-	//分别获取链接类别和链接，拼接在一起供前端显示
+class TestController extends BaseController {
+	//测试
 	public function index(){
 		//先获取所有链接类别
 		$category = D('Category');
@@ -38,22 +38,5 @@ class IndexController extends BaseController {
 		$this->display();
 	}
 
-	//添加推荐的网站
-	public function addRecommandedWeb(){
-		$recommand = D('Recommend');
-		if($recommand->create()){
-			$result = $recommand->add();
-			if($result){
-				echo '<script>';
-				echo 'alert("谢谢你的推荐！我们会尽快审核~")';
-				echo '</script>';
-				$this->redirect("");
-			}else{
-				echo '<script>';
-				echo 'alert("数据提交失败，请重新提交~")';
-				echo '</script>';
-				$this->redirect("");
-			}
-		}
-	}
+
 }
