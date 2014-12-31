@@ -57,11 +57,12 @@ body{
 	left: 0;
 	right: 0;
 	z-index: 9;
-	background-color: #fff;
+	background-image: url("/Public/images/header_bg5.jpg");
+	background-repeat: no-repeat;
+	background-position: 80% 45%;
 	padding: 0;
 	margin-bottom: 0px;
 	border-bottom: 1px solid #EAEAEA;
-	/*box-shadow: 0 1px 4px rgba(0,0,0,.05);*/
 	border-color: rgba(0,0,0,.08);
 	box-shadow: 0 1px 3px rgba(0,0,0,.03)
 }
@@ -181,7 +182,7 @@ body{
 	font-size: 14px;
 	float: left;
 	line-height: 16px;
-	color: #bbb;
+	color: #ffffff;
 	padding: 0 10px;
 	position: relative;
 	top: 1px;
@@ -327,10 +328,10 @@ body{
 
 .site-search{background-color: #fff;background-color: rgba(255,255,255,0.95);position: absolute;top:0;left:0;right:0;height: 100px;z-index: 1;}
 .site-search.active{top: 108px;}
-.site-search-form{padding: 25px 20%;overflow: hidden;}
+.site-search-form{padding: 30px 0% 30px 20%;overflow: hidden;}
 .search-input{float:left;color:#999;border:solid 1px #ddd;width:90%;height: 50px;padding: 4px 12px;border-right: none;font-size: 16px;border-radius: 2px 0 0 2px;outline: none}
-.search-input:focus{border-color: #45B6F7;}
-.search-btn{color:#fff;border: none;background: #45B6F7;height: 50px;font-size: 16px;padding: 0 12px;border-radius: 0 2px 2px 0;width: 10%;}
+.search-input:focus{border-color: #663366;}
+.search-btn{color:#fff;border: none;background: #663366;height: 50px;font-size: 16px;padding: 0 12px;border-radius: 0 2px 2px 0;width: 10%;}
 .search-btn:hover, .search-btn:focus{color:#fff;opacity: 0.85;filter:alpha(opacity=85);}
 .search-btn .fa{font-size: 16px;width: 16px;}
 .site-search-form a{margin-left: 20px;color: #999;}

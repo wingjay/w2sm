@@ -24,6 +24,28 @@
 
 <body>
 
+	<header class="header">
+		<div class="container">
+			<!--logo-->
+			<div class="logo">
+				<a href="www.4sjtu.com" title="wang to see more?"></a>
+			</div>
+
+			<!--name-->
+			<div class="brand">w2sm.me = want to see more,click me</div>
+
+			<!--search-->
+			<div class="site-search-form">
+				<input id="searchContent" class="search-input" name="s" type="text" placeholder="输入关键字搜索">
+				<button id="searchBtn" class="search-btn">
+					<i class="fa fa-search"></i>
+				</button>
+			</div>
+
+
+		</div>
+	</header>
+
 	<div class="pageheader">
 		<div class="container">
 			<h1>比较有个性的网址导航</h1>
@@ -83,6 +105,21 @@
 			<p>©2014 <a href="http://www.4sjtu.com">交大导航</a> 让同学们上网更快 <a href="http://www.miitbeian.gov.cn/">沪ICP备14053719号</a></p>
 		</div>
 	</footer>
+
+
+
+
+	<script>
+		$(function(){
+			var $searchBtn = $("#searchBtn");
+			var $searchContent = $("#searchContent");
+
+			$searchBtn.click(function(){
+				$searchContentUrl = "https://www.baidu.com/s?wd=" + $searchContent.val();
+				window.open($searchContentUrl);
+			})
+		})
+	</script>
 </body>
 
 </html>

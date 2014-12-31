@@ -1,6 +1,3 @@
 # Created by .gitignore support plugin (hsz.mobi)
-cache/
-Runtime/
-uploadFiles/
+Application/Runtime
 .idea/
-.DS_Store
