@@ -1,33 +1,159 @@
-<extend name="Template:template"/>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" lang="zh-CN">
+<head>
+	<mata http-equiv="X-UA-Compatible" content="IE=edge"></mata>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="/Public/css/Test/test.css">
+	<script type="text/javascript" src="/Public/js/jquery-1.11.1.js"></script>
+	<style type="text/css">
+		.wholePage {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
+		.w2sm_width {
+			width: 1200px;
+			height: 100%;
+			margin: 0 auto;
+		}
+		#header {
+			width: 100%;
+			height: 800px;
+			background-image: url("/Public/images/index/index_header_bg.png");
+		}
+		#head_nav {
+			position: absolute;
+			z-index: 10;
+			top: 0px;
+			width: 100%;
+			height: 150px;
+			background-image: url("/Public/images/index/index_nav_bg.png");
+		}
+		#head_bg_image {
+			position: absolute;
+			z-index: 1;
+			top: 0px;
+			width: 100%;
+		}
+		#head_bg_text {
+			position: absolute;
+			z-index: 10;
+			top: 350px;
+			text-align: center;
+			width: 100%;
+		}
+		#w2sm_logo {
+			width: 145px;
+			height: 23px;
+			float: left;
+			margin-top: 70px;
+			background-image: url("/Public/images/logo.png");
+		}
+		.head_nav_box {
+			float: right;
+			margin-top: 70px;
+		}
+		.head_nav_box a{
+			padding: 5px;
+			margin: 5px;
+			top: 40%;
+			right: 20%;
+			font-family: "华文细黑";
+			font-size: 16px;
+			color: #f5f5f5;
+		}
+		.head_nav_box .on{
+			border: 2px solid #4bcaff;
+			color: #4bcaff;
+		}
+		#searchDiv {
+			position: relative;
+			width: 100%;
+			height: 200px;
+			background-color: #4bcaff;
+		}
+		#searchTitle {
+			float: left;
+			margin-top: 30px;
+			width: 104px;
+			height: 42px;
+			background-image: url("/Public/images/search_title.png");
+		}
+		#searchBox {
+			position: absolute;
+			top: 100px;
+			left: 500px;
+			right: 500px;
+			height: 50px;
+			width: 600px;
+		}
+		#searchBox input {
+			float: left;
+			height: 40px;
+			width: 500px;
+			background-color: #ffffff;
+			border: 0px;
+			padding: 5px 10px;
+			font-size: 25px;
+			font-family: "华文细黑","Segoe UI";
+		}
+		#search_btn {
+			float: left;
+			margin: 9px;
+			height: 32px;
+			width: 32px;
+			background: url("/Public/images/searct_btn.png") no-repeat;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
 
+	<div class="wholePage">
 
-<!--左边导航栏-->
-<block name="leftContainerContent">
-	<volist name="linkType" id="vo">
-		<li>
-			<a href="/test">{$vo.name}</a>
-		</li>
-	</volist>
-</block>
-
-
-<block name="centerLinks">
-	<div class="items">
-		<volist name="links" id="vo">
-			<div class="item">
-				<h2>{$vo.type}</h2>
-				<ul class="xoxo blogroll">
-					<volist name="vo['content']" id="link">
-						<li onclick="window.open('{$link.link}')">
-							<a title={$link.name} target="_blank" data-key={$link.color} class="linkName">
-								{$link.name}
-							</a>
-							<!--<br>-->
-							<!--{$link.description}-->
-						</li>
-					</volist>
-				</ul>
+		<div id="header">
+			<!--导航条-->
+			<div id="head_nav">
+				<div class="w2sm_width">
+					<!--logo-->
+					<div id="w2sm_logo" ></div>
+					<!--导航栏-->
+					<div class="head_nav_box">
+						<a class="on" id="index_nav" href="#">首页</a>
+						<a id="about_nav" href="#">关于</a>
+						<a id="service_nav" href="#">服务</a>
+					</div>
+				</div>
 			</div>
-		</volist>
+
+			<!--文字-->
+			<div id="head_bg_text">
+				<img src="/Public/images/highlight_logo_text.png">
+			</div>
+		</div>
+
+		<!--搜索-->
+		<div id="searchDiv">
+			<div class="w2sm_width">
+				<!--标题-->
+				<div id="searchTitle">
+				</div>
+
+				<!--搜索框-->
+				<div id="searchBox">
+					<input id="searchContent">
+					<span id="search_btn" ></span>
+				</div>
+
+				<div id="searchTool">
+
+				</div>
+
+			</div>
+		</div>
+
+
 	</div>
-</block>
+
+
+</body>
