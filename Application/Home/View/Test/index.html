@@ -2,9 +2,64 @@
 <html xmlns="http://www.w3.org/1999/html" lang="zh-CN">
 <head>
 	<mata http-equiv="X-UA-Compatible" content="IE=edge"></mata>
+	<title>专为年轻人设计的暖心网址导航</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="/Public/css/Test/test.css">
 	<script type="text/javascript" src="/Public/js/jquery-1.11.1.js"></script>
+	<script>
+		$(function(){
+			var $searchEngine = $("#search_engine");
+			var $searchContent = $("#searchContent");
+			var $searchBtn = $("#search_btn");
+
+			var $listSearchEngine = $("#list_search_engine");
+			$searchEngine.click(function() {
+				$listSearchEngineStatus = $listSearchEngine.data("status");
+				if($listSearchEngineStatus == "hidden") {
+					$listSearchEngine.show();
+					$listSearchEngine.data("status", "shown");
+				}else if ($listSearchEngineStatus == "shown") {
+					$listSearchEngine.hide();
+					$listSearchEngine.data("status", "hidden");
+				}
+			});
+
+			var $searchEngineIcons = $(".search_engine_icon");
+			$searchEngineIcons.each(function(){
+				var $icon = $(this);
+				var engineType = $icon.data("key");
+				var engineTxt = $icon.data("align");
+				var engineUrl = $icon.data("action");
+
+				$icon.click(function(){
+					$searchContent.attr("placeholder",engineTxt);
+					$searchEngine.attr("class", engineType);
+					$searchBtn.data("action", engineUrl);
+					$listSearchEngine.hide();
+					$listSearchEngine.data("status", "hidden");
+				})
+			});
+
+			$searchContent.keydown(function(){
+				if(event.keyCode == 13) { //回车键
+					doSearch();
+				}
+			})
+			$searchBtn.click(function(){
+				doSearch();
+			});
+
+			function doSearch() {
+				var $searchEngineUrl = $searchBtn.data("action");
+				$searchContentUrl = $searchEngineUrl + $searchContent.val();
+				window.open($searchContentUrl);
+			}
+		})
+
+
+	</script>
+
+
 	<style type="text/css">
 		.wholePage {
 			position: relative;
@@ -58,7 +113,7 @@
 			margin: 5px;
 			top: 40%;
 			right: 20%;
-			font-family: "华文细黑";
+			font-family: "华文细黑","Segoe UI";
 			font-size: 16px;
 			color: #f5f5f5;
 		}
@@ -72,20 +127,33 @@
 			height: 200px;
 			background-color: #4bcaff;
 		}
-		#searchTitle {
+		.title {
+			position: absolute;
 			float: left;
-			margin-top: 30px;
+			top: 10%;
+			height: 50px;
+		}
+		.title .title_content {
+			font-family: "华文细黑","Segoe UI";
+			font-size: 25px;
+			color: #7f898f;
+		}
+		.title .title_content_line {
+			position: relative;
+			width: 45px;
+			height: 2px;
+			background: url("/Public/images/webAddress/title_line.png") no-repeat;
+		}
+		#searchTitle {
 			width: 104px;
-			height: 42px;
 			background-image: url("/Public/images/search_title.png");
 		}
 		#searchBox {
 			position: absolute;
-			top: 100px;
-			left: 500px;
-			right: 500px;
-			height: 50px;
-			width: 600px;
+			top: 40%;
+			left: 35%;
+			height: 100px;
+			width: 650px;
 		}
 		#searchBox input {
 			float: left;
@@ -94,8 +162,18 @@
 			background-color: #ffffff;
 			border: 0px;
 			padding: 5px 10px;
-			font-size: 25px;
+			font-size: 20px;
 			font-family: "华文细黑","Segoe UI";
+		}
+		#searchBox input:focus {
+			outline:medium;
+		}
+		#search_engine {
+			float: left;
+			height: 40px;
+			width: 40px;
+			margin: 8px;
+			cursor: pointer;
 		}
 		#search_btn {
 			float: left;
@@ -103,8 +181,55 @@
 			height: 32px;
 			width: 32px;
 			background: url("/Public/images/searct_btn.png") no-repeat;
+			border: 0px;
 			cursor: pointer;
 		}
+		#search_btn:focus {
+			outline:medium;
+		}
+		#list_search_engine {
+			float: left;
+			height: 65px;
+			width: 510px;
+			margin-left: -101px;
+			background: url("/Public/images/search/search_tool_bg.png") no-repeat;
+		}
+		#list_search_engine span {
+			float: left;
+			margin-left: 19px;
+			cursor: pointer;
+			margin-top: 20px;
+			height: 40px;
+			width: 40px;
+		}
+		.baidu {
+			background: url("/Public/images/search/baidu.png") no-repeat;
+		}
+		.google {
+			background: url("/Public/images/search/google.png") no-repeat;
+		}
+		.youku {
+			background: url("/Public/images/search/youku.png") no-repeat;
+		}
+		.tmall {
+			background: url("/Public/images/search/tmall.png") no-repeat;
+		}
+		.amazon {
+			background: url("/Public/images/search/amazon.png") no-repeat;
+		}
+		.wiki {
+			background: url("/Public/images/search/wiki.png") no-repeat;
+		}
+		.taobao {
+			background: url("/Public/images/search/taobao.png") no-repeat;
+		}
+		.webAddressDiv {
+			position: relative;
+			width: 100%;
+			height: 500px;
+			background-color: #ffffff;
+		}
+
 	</style>
 </head>
 <body>
@@ -120,8 +245,8 @@
 					<!--导航栏-->
 					<div class="head_nav_box">
 						<a class="on" id="index_nav" href="#">首页</a>
-						<a id="about_nav" href="#">关于</a>
-						<a id="service_nav" href="#">服务</a>
+						<a id="about_nav" href="#">推荐</a>
+						<a id="service_nav" href="#">联系我们</a>
 					</div>
 				</div>
 			</div>
@@ -136,24 +261,51 @@
 		<div id="searchDiv">
 			<div class="w2sm_width">
 				<!--标题-->
-				<div id="searchTitle">
+				<div class="title" id="searchTitle">
 				</div>
 
 				<!--搜索框-->
 				<div id="searchBox">
-					<input id="searchContent">
-					<span id="search_btn" ></span>
-				</div>
-
-				<div id="searchTool">
-
+					<div>
+						<span id="search_engine" class="google"></span>
+						<input type="text" id="searchContent" placeholder="点击左边图标即可切换搜索引擎哦~" maxlength="255">
+						<button type="submit" data-action="http://g.openibm.com/#q=" id="search_btn"></button>
+					</div>
+					<div id="list_search_engine" style="display: none" data-status="hidden">
+						<span data-key="baidu" data-align="百度搜索" data-action="https://www.baidu.com/s?wd=" class="baidu search_engine_icon" style="width: 30px"></span>
+						<span data-key="google" data-align="谷歌搜索(在墙内，我们的一大爱好就是搜集谷歌ip)" data-action="http://g.openibm.com/#q=" class="google search_engine_icon" style="width: 30px"></span>
+						<span data-key="youku" data-align="优酷搜索" data-action="http://www.soku.com/search_video/q_" class="youku search_engine_icon"></span>
+						<span data-key="amazon" data-align="亚马逊搜索" data-action="http://www.amazon.cn/s/field-keywords=" class="amazon search_engine_icon"></span>
+						<span data-key="wiki" data-align="维基百科搜索" data-action="http://zh.wikipedia.org/wiki/" class="wiki search_engine_icon"></span>
+						<span data-key="taobao" data-align="淘宝搜索" data-action="http://s.taobao.com/search?q=" class="taobao search_engine_icon"></span>
+						<span data-key="tmall" data-align="天猫搜索" data-action="http://list.tmall.com/search_product.htm?q=" class="tmall search_engine_icon"></span>
+					</div>
 				</div>
 
 			</div>
 		</div>
 
+		<!--网址展示-->
+		<div class="webAddressDiv">
+			<div class="w2sm_width">
+
+				<!--标题-->
+				<div class="title">
+					<div class="title_content">我想要</div>
+					<div class="title_content_line"/>
+				</div>
+
+				<!--导航类-->
+				<div></div>
+
+
+
+
+			</div>
+		</div>
 
 	</div>
+
 
 
 </body>
