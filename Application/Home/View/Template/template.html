@@ -2,12 +2,16 @@
 <html xmlns="http://www.w3.org/1999/html" lang="zh-CN">
 <head>
     <block name="title">
-        <title>比较有个性的校内导航</title>
+	    <title>为好奇者</title>
     </block>
-	<meta name="apple-mobile-web-app-title" content="导航">
+	<meta name="author" content="wingjay" />
+	<meta name="apple-mobile-web-app-title" content="为好奇心导航">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.css"/>
+	<meta name="description" content="区区一个导航却能彻底改变你的视界." />
+	<meta name="keywords"  content="导航，网址导航，想要看更多，w2sm，123，" />
+	<meta name="Resource-type" content="Document" />
+	<link rel="stylesheet" type="text/css" href="/Public/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="/Public/css/base.css" media="all"/>
 	<link rel="stylesheet" id="da-fontawesome-css" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css?ver=7.0.4" type="text/css" media="all">
 	<link rel="shortcut icon" href="/public/images/icon/favicon.ico">
@@ -18,38 +22,124 @@
     <script type="text/javascript" src="/Public/js/util.js"></script>
 	<link rel="stylesheet" type="text/css" href="/Public/css/Index/nav.css"/>
 
-
+	<link rel="stylesheet" type="text/css" href="Public/css/fs.gridlock.css" />
+	<link rel="stylesheet" type="text/css" href="Public/css/jquery.fs.selecter.css" />
     <!--头部可以引入一些css和js-->
     <block name="head"></block>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var $searchEngine = $("#search_engine");
+			var $searchContent = $("#searchContent");
+			var $searchBtn = $("#search_btn");
 
+			var $listSearchEngine = $("#list_search_engine");
+			$searchEngine.click(function() {
+				if($listSearchEngine.is(":visible")) {
+					$listSearchEngine.fadeOut();
+				}else {
+					$listSearchEngine.fadeIn();
+				}
+			});
+
+			var $searchEngineIcons = $(".search_engine_icon");
+			$searchEngineIcons.each(function(){
+				var $icon = $(this);
+				var engineType = $icon.data("key");
+				var engineTxt = $icon.data("align");
+				var engineUrl = $icon.data("action");
+
+				$icon.click(function(){
+					$searchContent.attr("placeholder",engineTxt);
+					var newSrc =$(this).find('img').attr("src");
+					$searchEngine.find("img").attr("src", newSrc);
+					$searchBtn.data("action", engineUrl);
+					$listSearchEngine.hide();
+				})
+			});
+
+			$searchContent.keydown(function(){
+				if(event.keyCode == 13) { //回车键
+					doSearch();
+				}
+			})
+			$searchBtn.click(function(){
+				doSearch();
+			});
+
+			function doSearch() {
+				var $searchEngineUrl = $searchBtn.data("action");
+				$searchContentUrl = $searchEngineUrl + $searchContent.val();
+				window.open($searchContentUrl);
+			}
+		});
+	</script>
 </head>
 
-<body>
-
-	<header class="header">
-		<div class="container">
-			<!--logo-->
-			<div class="logo">
-				<a href="www.4sjtu.com" title="wang to see more?"></a>
+<body class="gridlock">
+	<!--顶部搜索-->
+	<div id="header">
+		<div class="row">
+			<div class="desktop-3 tablet-1 mobile-3" id="searchTitle">
+				<div>
+					<img src="/Public/images/search_title.png">
+				</div>
 			</div>
+			<div class="desktop-8 tablet-5 mobile-3">
+				<div class="row">
+					<div class="desktop-1 tablet-1 mobile-3 centered" id="search_engine">
+						<span class="google">
+							<img src="/Public/images/search/google.png"/>
+						</span>
+					</div>
+					<div class="desktop-10 tablet-4 mobile-3">
+						<input type="text" id="searchContent" placeholder="点击左边图标即可切换搜索引擎哦~">
+					</div>
+					<div class="desktop-1 tablet-1 mobile-3">
+						<span>
+							<button type="submit" data-action="http://g.openibm.com/#q=" id="search_btn"></button>
+						</span>
+					</div>
+				</div>
 
-			<!--name-->
-			<div class="brand">w2sm.me = want to see more,click me</div>
+				<div class="row">
+					<div id="list_search_engine" style="display: none">
+						<span data-key="baidu" data-align="我想去搜索之度娘"
+						      data-action="https://www.baidu.com/s?wd=" class=" baidu search_engine_icon" style="width: 30px">
+							<img src="/Public/images/search/baidu.png"/>
+				        </span>
+						<span data-key="google" data-align="我想去搜索之谷歌"
+						      data-action="http://g.openibm.com/#q=" class="google search_engine_icon" style="width: 30px">
+							<img src="/Public/images/search/google.png"/>
+				        </span>
+						<span data-key="youku" data-align="我想去看视频之优酷"
+						      data-action="http://www.soku.com/search_video/q_" class="youku search_engine_icon">
+							<img src="/Public/images/search/youku.png"/>
+				        </span>
+						<span data-key="amazon" data-align="我想去购物之亚马逊"
+						      data-action="http://www.amazon.cn/s/field-keywords=" class="amazon search_engine_icon">
+							<img src="/Public/images/search/amazon.png"/>
+				        </span>
+						<span data-key="wiki" data-align="我想去了解之维基百科"
+						      data-action="http://zh.wikipedia.org/wiki/" class="wiki search_engine_icon">
+							<img src="/Public/images/search/wiki.png"/>
+				        </span>
+						<span data-key="taobao" data-align="我想去购物之淘宝"
+						      data-action="http://s.taobao.com/search?q=" class="taobao search_engine_icon">
+							<img src="/Public/images/search/taobao.png"/>
+				        </span>
+						<span data-key="tmall" data-align="我想去购物之天猫"
+						      data-action="http://list.tmall.com/search_product.htm?q=" class="tmall search_engine_icon">
+							<img src="/Public/images/search/tmall.png"/>
+				        </span>
+					</div>
+				</div>
 
-			<!--search-->
-			<div class="site-search-form">
-				<input id="searchContent" class="search-input" name="s" type="text" placeholder="输入关键字搜索">
-				<button id="searchBtn" class="search-btn">
-					<i class="fa fa-search"></i>
-				</button>
 			</div>
-
-
 		</div>
-	</header>
+	</div>
 
-	<div class="pageheader">
-		<div class="container">
+	<div class="pageheader" >
+		<div class="container"style="display: none">
 			<h1>比较有个性的网址导航</h1>
 			<div class="note">看起来竟然有点风骚！</div>
 		</div>
@@ -67,7 +157,7 @@
 		<block name="centerLinks"></block>
 
 		<!--右边功能栏-->
-		<div class="function">
+		<div class="function" style="display: none">
 			<!--我要推荐-->
 			<div id="recommand">
 				<div id="recommandTitle" data-status="hidden" style="cursor: pointer"><p>我要推荐网站</p></div>

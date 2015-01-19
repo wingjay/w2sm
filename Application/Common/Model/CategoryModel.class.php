@@ -27,8 +27,12 @@ class CategoryModel extends Model {
 		array('establish_time','time',1,'function'),
 	);
 
-	public function findAll(){
-		return $this->order("importance desc")->select();
+	public function findAll($type = ""){
+		if($type != "") {
+			$where['typeId'] = $type;
+			return $this->where($where)->order("importance")->select();
+		}
+		return $this->order("importance")->select();
 	}
 	/**@author lxd
 	 * @description 根据id查找name字段

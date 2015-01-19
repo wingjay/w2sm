@@ -67,6 +67,76 @@ body{
 	box-shadow: 0 1px 3px rgba(0,0,0,.03)
 }
 
+/* Search
+* --------------------------------------- */
+#header{
+	top:0px;
+	position:fixed;
+	height: 80px;
+	display:block;
+	width: 100%;
+	background: #26A65B;
+	z-index:9;
+	text-align:center;
+	color: #f2f2f2;
+	padding: 15px 0 0 0;
+}
+#searchTitle {
+	margin-top: 10px;
+}
+#searchBox {
+	position: absolute;
+	top: 10%;
+	left: 35%;
+}
+#searchContent {
+	float: left;
+	height: 50px;
+	width: 100%;
+	background-color: #ffffff;
+	border: 0px;
+	padding: 5px 10px;
+	font-size: 20px;
+	font-family: "华文细黑","Segoe UI";
+}
+#searchContent:focus {
+	outline:medium;
+}
+#search_engine {
+	float: left;
+	height: 40px;
+	margin-top: 10px;
+	cursor: pointer;
+}
+#search_btn {
+	float: left;
+	height: 40px;
+	width: 100%;
+	margin-top: 10px;
+	background: url("/Public/images/searct_btn.png") no-repeat;
+	border: 0px;
+	cursor: pointer;
+}
+#search_btn:focus {
+	outline:medium;
+}
+#list_search_engine {
+	float: left;
+	height: 65px;
+	width: 510px;
+	margin-left: -42px;
+	margin-top: 4px;
+	background: url("/Public/images/search/search_tool_bg.png") no-repeat;
+}
+#list_search_engine span {
+	float: left;
+	margin-left: 19px;
+	cursor: pointer;
+	margin-top: 20px;
+	height: 40px;
+	width: 40px;
+}
+/*******************************************************************************/
 
 .category-see .header,
 .page-template-pagesnav-php .header,
@@ -2065,7 +2135,7 @@ body.sign-show {
 
 
 
-.pageheader{overflow: hidden;background-color: #663366;padding: 25px 20px;margin-bottom:15px;color: #fff;}
+.pageheader{overflow: hidden;background-color: #37BC9B;padding: 0px 20px;margin-bottom:15px;color: #fff; margin-top: 80px !important;}
 .pageheader h1{font-size: 30px;margin:0}
 .pageheader h1 small{color: #fff;font-size: 12px;margin-left: 10px;position: relative;top: -4px;}
 .pageheader .note{margin-top: 5px;}
@@ -2292,7 +2362,7 @@ pre.prettyprint.linenums ol li {
 /*  ======================================================================================================== */
 
 @media (max-width: 1240px) {
-	.container{margin: 0 15px;}
+	.container{margin: 20px 15px;}
 }
 
 @media (max-width: 1024px) {

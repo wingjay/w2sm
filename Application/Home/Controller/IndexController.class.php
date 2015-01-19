@@ -57,8 +57,4 @@ class IndexController extends BaseController {
 		}
 	}
 
-	public function coder(){
-		echo "coder";
-	}
-
 }
