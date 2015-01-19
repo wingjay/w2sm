@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/html" lang="zh-CN">
+<head>
+	<mata http-equiv="X-UA-Compatible" content="IE=edge"></mata>
+	<title>专为年轻人设计的暖心网址导航</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="/Public/css/Test/test.css">
+	<script type="text/javascript" src="/Public/js/jquery-1.11.1.js"></script>
+	<script>
+		$(function(){
+			var $searchEngine = $("#search_engine");
+			var $searchContent = $("#searchContent");
+			var $searchBtn = $("#search_btn");
+
+			var $listSearchEngine = $("#list_search_engine");
+			$searchEngine.click(function() {
+				if($listSearchEngine.is(":visible")) {
+					$listSearchEngine.fadeOut();
+				}else {
+					$listSearchEngine.fadeIn();
+				}
+			});
+
+			var $searchEngineIcons = $(".search_engine_icon");
+			$searchEngineIcons.each(function(){
+				var $icon = $(this);
+				var engineType = $icon.data("key");
+				var engineTxt = $icon.data("align");
+				var engineUrl = $icon.data("action");
+
+				$icon.click(function(){
+					$searchContent.attr("placeholder",engineTxt);
+					$searchEngine.attr("class", engineType);
+					$searchBtn.data("action", engineUrl);
+					$listSearchEngine.hide();
+				})
+			});
+
+			$searchContent.keydown(function(){
+				if(event.keyCode == 13) { //回车键
+					doSearch();
+				}
+			})
+			$searchBtn.click(function(){
+				doSearch();
+			});
+
+			function doSearch() {
+				var $searchEngineUrl = $searchBtn.data("action");
+				$searchContentUrl = $searchEngineUrl + $searchContent.val();
+				window.open($searchContentUrl);
+			}
+
+
+
+
+		})
+
+
+	</script>
+
+
+	<style type="text/css">
+		body{
+			background-color: #eceef0;
+			height: 5000px;
+			font-family: "fontawesome","准圆","Segoe UI Semibold";
+		}
+		.wholePage {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
+		.w2sm_width {
+			width: 1200px;
+			height: 100%;
+			margin: 0 auto;
+		}
+		#header {
+			width: 100%;
+			height: 800px;
+			background-image: url("/Public/images/index/index_header_bg.png");
+		}
+		#head_nav {
+			position: absolute;
+			z-index: 10;
+			top: 0px;
+			width: 100%;
+			height: 150px;
+			background-image: url("/Public/images/index/index_nav_bg.png");
+		}
+		#head_bg_image {
+			position: absolute;
+			z-index: 1;
+			top: 0px;
+			width: 100%;
+		}
+		#head_bg_text {
+			position: absolute;
+			z-index: 10;
+			top: 350px;
+			text-align: center;
+			width: 100%;
+		}
+		#w2sm_logo {
+			width: 145px;
+			height: 23px;
+			float: left;
+			margin-top: 70px;
+			background-image: url("/Public/images/logo.png");
+		}
+		.head_nav_box {
+			float: right;
+			margin-top: 70px;
+		}
+		.head_nav_box a{
+			padding: 5px;
+			margin: 5px;
+			top: 40%;
+			right: 20%;
+			font-family: "华文细黑","Segoe UI";
+			font-size: 16px;
+			color: #f5f5f5;
+		}
+		.head_nav_box .on{
+			border: 2px solid #4bcaff;
+			color: #4bcaff;
+		}
+		#search {
+			position: relative;
+			width: 100%;
+			height: 180px;
+			z-index: 99;
+			background-color: #4bcaff;
+		}
+		.scrolled {
+			position: fixed !important;
+			top: 0px ;
+			height: 100px !important;
+		}
+		.title {
+			position: absolute;
+			float: left;
+			top: 20px;
+			height: 50px;
+		}
+		.title .title_content {
+			font-family: "华文细黑","Segoe UI";
+			font-size: 25px;
+			text-align: center;
+			color: #7f898f;
+		}
+		.title .title_content_line {
+			position: relative;
+			width: 45px;
+			height: 2px;
+			background: url("/Public/images/webAddress/title_line.png") no-repeat;
+		}
+		#searchTitle {
+			width: 104px;
+			background-image: url("/Public/images/search_title.png");
+		}
+		#searchBox {
+			position: absolute;
+			top: 35%;
+			left: 35%;
+			height: 100px;
+			width: 650px;
+		}
+		#searchBox input {
+			float: left;
+			height: 40px;
+			width: 500px;
+			background-color: #ffffff;
+			border: 0px;
+			padding: 5px 10px;
+			font-size: 20px;
+			font-family: "华文细黑","Segoe UI";
+		}
+		#searchBox input:focus {
+			outline:medium;
+		}
+		#search_engine {
+			float: left;
+			height: 40px;
+			width: 40px;
+			margin: 8px;
+			cursor: pointer;
+		}
+		#search_btn {
+			float: left;
+			margin: 9px;
+			height: 32px;
+			width: 32px;
+			background: url("/Public/images/searct_btn.png") no-repeat;
+			border: 0px;
+			cursor: pointer;
+		}
+		#search_btn:focus {
+			outline:medium;
+		}
+		#list_search_engine {
+			float: left;
+			height: 65px;
+			width: 510px;
+			margin-left: -101px;
+			background: url("/Public/images/search/search_tool_bg.png") no-repeat;
+		}
+		#list_search_engine span {
+			float: left;
+			margin-left: 19px;
+			cursor: pointer;
+			margin-top: 20px;
+			height: 40px;
+			width: 40px;
+		}
+		.baidu {
+			background: url("/Public/images/search/baidu.png") no-repeat;
+		}
+		.google {
+			background: url("/Public/images/search/google.png") no-repeat;
+		}
+		.youku {
+			background: url("/Public/images/search/youku.png") no-repeat;
+		}
+		.tmall {
+			background: url("/Public/images/search/tmall.png") no-repeat;
+		}
+		.amazon {
+			background: url("/Public/images/search/amazon.png") no-repeat;
+		}
+		.wiki {
+			background: url("/Public/images/search/wiki.png") no-repeat;
+		}
+		.taobao {
+			background: url("/Public/images/search/taobao.png") no-repeat;
+		}
+		.webAddressDiv {
+			position: relative;
+			width: 100%;
+			top: 100px;
+			height: 200px;
+		}
+
+	</style>
+</head>
+<body>
+
+	<div class="wholePage">
+
+		<div style="position:relative; top:0px;width: 100%; height: 860px;background-color: #feee00">
+			<div class="w2sm_width" style="position:relative;top:0px;">
+				<div style="width: auto;float: left"><img style="margin-top: 70px" src="/Public/images/menu.png"></div>
+				<div style="width:auto;text-align: center"><img style="margin-top: 50px" src="/Public/images/logo2.png"></div>
+				<div style="margin-top:300px;text-align: center">
+					<span style="font-size: 60px;font-family: Segoe UI Light">WANT TO SEE MORE . ME</span>
+				</div>
+				<div style="margin-top:20px;text-align: center">
+					<span style="font-size: 50px;font-family: '幼圆';">你甚至想象不到，我们竟能让你的视界变得如此优雅</span>
+				</div>
+				<div style="margin-top: 100px;text-align: center">
+					<span style="border: 2px solid #000000;font-size: 25px;padding:10px 50px 10px 50px;font-family: '幼圆';">启动导航</span>
+				</div>
+				<div style="margin-top:150px;text-align: center;"></div>
+			</div>
+
+		</div>
+
+		<div id="header" style="display: none">
+			<!--导航条-->
+			<div id="head_nav">
+				<div class="w2sm_width">
+					<!--logo-->
+					<div id="w2sm_logo" ></div>
+					<!--导航栏-->
+					<div class="head_nav_box">
+						<a class="" id="index_nav" href="#"></a>
+						<a id="about_nav" href="#"></a>
+						<a id="service_nav" href="#"></a>
+					</div>
+				</div>
+			</div>
+
+			<!--文字-->
+			<div id="head_bg_text">
+				<img src="/Public/images/highlight_logo_text.png">
+			</div>
+		</div>
+
+		<!--搜索-->
+		<div id="search">
+			<div class="w2sm_width">
+				<!--标题-->
+				<div class="title" id="searchTitle">
+				</div>
+
+				<!--搜索框-->
+				<div id="searchBox">
+					<div>
+						<span id="search_engine" class="google"></span>
+						<input type="text" id="searchContent" placeholder="点击左边图标即可切换搜索引擎哦~" maxlength="255">
+						<button type="submit" data-action="http://g.openibm.com/#q=" id="search_btn"></button>
+					</div>
+					<div id="list_search_engine" style="display: none">
+						<span data-key="baidu" data-align="我想去搜索之度娘" data-action="https://www.baidu.com/s?wd=" class="baidu search_engine_icon" style="width: 30px"></span>
+						<span data-key="google" data-align="我想去搜索之谷歌(在墙内，我们的一大爱好就是搜集谷歌ip)" data-action="http://g.openibm.com/#q=" class="google search_engine_icon" style="width: 30px"></span>
+						<span data-key="youku" data-align="我想去看视频之优酷" data-action="http://www.soku.com/search_video/q_" class="youku search_engine_icon"></span>
+						<span data-key="amazon" data-align="我想去购物之亚马逊" data-action="http://www.amazon.cn/s/field-keywords=" class="amazon search_engine_icon"></span>
+						<span data-key="wiki" data-align="我想去了解之维基百科" data-action="http://zh.wikipedia.org/wiki/" class="wiki search_engine_icon"></span>
+						<span data-key="taobao" data-align="我想去购物之淘宝" data-action="http://s.taobao.com/search?q=" class="taobao search_engine_icon"></span>
+						<span data-key="tmall" data-align="我想去购物之天猫" data-action="http://list.tmall.com/search_product.htm?q=" class="tmall search_engine_icon"></span>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!--网址展示-->
+		<div class="webAddressDiv">
+			<div class="w2sm_width">
+
+				<!--标题-->
+				<div class="title">
+
+				</div>
+
+				<!--导航类-->
+				<div>
+					<ul>
+						<li></li>
+					</ul>
+				</div>
+
+
+
+
+			</div>
+		</div>
+
+	</div>
+
+<script>
+	$(function(){
+		var searchDivOffset = $("#search").offset().top;
+		$(window).scroll(function(){
+			$('#search').toggleClass('scrolled', $(this).scrollTop() > searchDivOffset-50);
+		});
+	})
+</script>
+
+</body>

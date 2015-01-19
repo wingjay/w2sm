@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/html" lang="zh-CN">
 <head>
 	<mata http-equiv="X-UA-Compatible" content="IE=edge"></mata>
 	<title>专为年轻人设计的暖心网址导航</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" href="/Public/css/Test/test.css">
-	<script type="text/javascript" src="/Public/js/jquery-1.11.1.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/css/Test/test.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/animate.css">
+	<script type="text/javascript" src="__PUBLIC__/js/jquery-1.11.1.js"></script>
 	<script>
 		$(function(){
 			var $searchEngine = $("#search_engine");
@@ -14,13 +16,10 @@
 
 			var $listSearchEngine = $("#list_search_engine");
 			$searchEngine.click(function() {
-				$listSearchEngineStatus = $listSearchEngine.data("status");
-				if($listSearchEngineStatus == "hidden") {
-					$listSearchEngine.show();
-					$listSearchEngine.data("status", "shown");
-				}else if ($listSearchEngineStatus == "shown") {
-					$listSearchEngine.hide();
-					$listSearchEngine.data("status", "hidden");
+				if($listSearchEngine.is(":visible")) {
+					$listSearchEngine.fadeOut();
+				}else {
+					$listSearchEngine.fadeIn();
 				}
 			});
 
@@ -36,7 +35,6 @@
 					$searchEngine.attr("class", engineType);
 					$searchBtn.data("action", engineUrl);
 					$listSearchEngine.hide();
-					$listSearchEngine.data("status", "hidden");
 				})
 			});
 
@@ -54,6 +52,20 @@
 				$searchContentUrl = $searchEngineUrl + $searchContent.val();
 				window.open($searchContentUrl);
 			}
+
+			var $typeDivs = $('.w2sm_type_overlay');
+			$typeDivs.each(function() {
+				var $typeDiv = $(this);
+				var typeUrl = $typeDiv.data("key");
+				$typeDiv.click(function() {
+					window.location.href = typeUrl;
+					alert(typeUrl);
+				});
+
+			});
+
+
+
 		})
 
 
@@ -61,6 +73,12 @@
 
 
 	<style type="text/css">
+		body{
+			/*background-color: #eceef0 !important;*/
+			background-color: #f7f7f7 !important;
+			height: 5000px;
+			font-family: "fontawesome","准圆","Segoe UI Semibold";
+		}
 		.wholePage {
 			position: relative;
 			width: 100%;
@@ -72,92 +90,80 @@
 			margin: 0 auto;
 		}
 		#header {
+			position:relative;
+			top:0px;
 			width: 100%;
-			height: 800px;
-			background-image: url("/Public/images/index/index_header_bg.png");
+			height: 1000px;
+			background-color: #ffdf4f;
+			/*background-color: #fcdb00;*/
 		}
 		#head_nav {
-			position: absolute;
-			z-index: 10;
-			top: 0px;
-			width: 100%;
-			height: 150px;
-			background-image: url("/Public/images/index/index_nav_bg.png");
+			position:relative;
+			top:0px;
 		}
-		#head_bg_image {
-			position: absolute;
-			z-index: 1;
-			top: 0px;
-			width: 100%;
-		}
-		#head_bg_text {
-			position: absolute;
-			z-index: 10;
-			top: 350px;
-			text-align: center;
-			width: 100%;
+		#menu {
+			width: auto;
+			float: left;
+			cursor: pointer;
 		}
 		#w2sm_logo {
-			width: 145px;
-			height: 23px;
-			float: left;
-			margin-top: 70px;
-			background-image: url("/Public/images/logo.png");
+			width:auto;
+			text-align: center;
+			cursor: pointer;
 		}
-		.head_nav_box {
-			float: right;
-			margin-top: 70px;
+		.slogan {
+			text-align: center;
 		}
-		.head_nav_box a{
-			padding: 5px;
-			margin: 5px;
-			top: 40%;
-			right: 20%;
-			font-family: "华文细黑","Segoe UI";
-			font-size: 16px;
-			color: #f5f5f5;
+		#start_button {
+			border: 2px solid #000000;
+			font-size: 25px;
+			padding:10px 50px 10px 50px;
+			font-family: '幼圆';
+			cursor: pointer;
 		}
-		.head_nav_box .on{
-			border: 2px solid #4bcaff;
-			color: #4bcaff;
+		#start_button:hover {
+			/*background-color: #84c011;*/
+			background-color: #f26849;
+			color: #ffffff;
 		}
+		#more {
+			cursor: pointer;
+		}
+
 		#searchDiv {
 			position: relative;
 			width: 100%;
-			height: 200px;
-			background-color: #4bcaff;
+			height: 180px;
+			z-index: 99;
+			background-color: #f26849;
+			/*background-color: #4bcaff;*/
 		}
-		.title {
-			position: absolute;
-			float: left;
-			top: 10%;
-			height: 50px;
+		.scrolled {
+			position: fixed !important;
+			top: 0px ;
+			height: 100px !important;
+			opacity: 0.91;
 		}
-		.title .title_content {
-			font-family: "华文细黑","Segoe UI";
-			font-size: 25px;
-			color: #7f898f;
-		}
-		.title .title_content_line {
-			position: relative;
-			width: 45px;
-			height: 2px;
-			background: url("/Public/images/webAddress/title_line.png") no-repeat;
+		.scrollWebAddress {
+			top: 180px !important;
+			opacity: 0.91;
 		}
 		#searchTitle {
 			width: 104px;
-			background-image: url("/Public/images/search_title.png");
+			background-color: #f26849;
+			position: relative;
+			top: 20%;
 		}
 		#searchBox {
 			position: absolute;
-			top: 40%;
+			top: 35%;
 			left: 35%;
 			height: 100px;
 			width: 650px;
 		}
 		#searchBox input {
 			float: left;
-			height: 40px;
+			height: 48px;
 			width: 500px;
 			background-color: #ffffff;
 			border: 0px;
@@ -223,37 +229,134 @@
 		.taobao {
 			background: url("/Public/images/search/taobao.png") no-repeat;
 		}
-		.webAddressDiv {
+		#webAddressDiv {
 			position: relative;
 			width: 100%;
-			height: 500px;
-			background-color: #ffffff;
+			top: 0px;
+			height: 200px;
+		}
+
+		.w2sm_type {
+			margin-bottom: 30px;
+			/*height: 300px;*/
+		}
+		.w2sm_type .w2sm_type_vision {
+			position: relative;
+			overflow: hidden;
+		}
+		.w2sm_type .w2sm_type_vision img {
+			width: 100%;
+		}
+		.w2sm_type .w2sm_type_vision .w2sm_type_overlay {
+			/*background-color: #ec523f;*/
+			/*background-color: #fcdb00;*/
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			padding: 25px;
+			text-align: center;
+			color: white;
+			opacity: 0;
+			visibility: hidden;
+			-webkit-transition: all 200ms ease-in-out;
+			-moz-transition: all 200ms ease-in-out;
+			transition: all 200ms ease-in-out;
+		}
+		.w2sm_type .w2sm_type_vision .sjtu {
+			background-color: #6a9ac3;
+		}
+		.w2sm_type .w2sm_type_vision .coder {
+			background-color: #8b5f4a;
+		}
+		.w2sm_type .w2sm_type_vision .zhai {
+			 background-color: #9d8e7c;
+		 }
+		.w2sm_type .w2sm_type_vision .fun {
+			background-color: #289a99;
+		}
+		.w2sm_type .w2sm_type_vision .wenyi {
+			background-color: #858585;
+		}
+		.w2sm_type .w2sm_type_vision .shopping {
+			background-color: #ec523f;
+		}
+		.w2sm_type .w2sm_type_vision .job {
+			background-color: #cdad95;
+		}
+
+		.w2sm_type .w2sm_type_vision .w2sm_type_overlay h3 {
+			font-size: 18px;
+			text-transform: uppercase;
+			color: white;
+			padding-bottom: 10px;
+			margin-bottom: 10px;
+			display: inline-block;
+			border-bottom: 1px solid white;
+		}
+		.w2sm_type .w2sm_type_vision .w2sm_type_overlay h2 {
+			text-transform: uppercase;
+			color: white;
+			padding-bottom: 10px;
+			margin-bottom: 10px;
+			display: inline-block;
+			border-bottom: 1px solid white;
+		}
+		.w2sm_type .w2sm_type_vision .w2sm_type_overlay p{
+			font-size: 17px;
+		}
+		.w2sm_type .w2sm_type_vision:hover .w2sm_type_overlay {
+			opacity: 0.91;
+			visibility: visible;
+			cursor: pointer;
+		}
+		.w2sm_type .w2sm_type_vision:hover .w2sm_type_overlay h3{
+			/*opacity: 1;*/
+		}
+		.w2sm_type .w2sm_type_vision:hover .w2sm_type_overlay p{
+			/*opacity: 1;*/
 		}
 
 	</style>
 </head>
 <body>
-
 	<div class="wholePage">
 
 		<div id="header">
-			<!--导航条-->
 			<div id="head_nav">
 				<div class="w2sm_width">
+					<!--菜单-->
+					<div id="menu">
+						<a href="/index"><img style="margin-top: 70px" src="/Public/images/menu.png"></a>
+					</div>
 					<!--logo-->
-					<div id="w2sm_logo" ></div>
-					<!--导航栏-->
-					<div class="head_nav_box">
-						<a class="on" id="index_nav" href="#">首页</a>
-						<a id="about_nav" href="#">推荐</a>
-						<a id="service_nav" href="#">联系我们</a>
+					<div id="w2sm_logo">
+						<a href="/index"><img class="animated zoomInDown" style="margin-top: 50px" src="/Public/images/logo2.png"></a>
+					</div>
+
+					<!--slogan-->
+					<div class="slogan" style="margin-top:300px;">
+						<span style="font-size: 50px;font-family: Segoe UI Light">
+							WANT TO SEE MORE . ME
+						</span>
+					</div>
+					<div class="slogan" style="margin-top:20px;">
+						<span style="font-size: 45px;font-family: '幼圆';">
+							你甚至想象不到，我们竟能让你的视界变得如此优雅
+						</span>
+					</div>
+
+					<!--start button-->
+					<div style="margin-top: 100px;text-align: center">
+						<span id="start_button">
+							启动导航
+						</span>
+					</div>
+					<div id="more" style="margin-top:150px;text-align: center;">
+						<img src="/Public/images/more.png" alt=""/>
 					</div>
 				</div>
-			</div>
-
-			<!--文字-->
-			<div id="head_bg_text">
-				<img src="/Public/images/highlight_logo_text.png">
 			</div>
 		</div>
 
@@ -261,7 +364,8 @@
 		<div id="searchDiv">
 			<div class="w2sm_width">
 				<!--标题-->
-				<div class="title" id="searchTitle">
+				<div id="searchTitle">
+					<img src="/Public/images/search_title.png">
 				</div>
 
 				<!--搜索框-->
@@ -271,14 +375,14 @@
 						<input type="text" id="searchContent" placeholder="点击左边图标即可切换搜索引擎哦~" maxlength="255">
 						<button type="submit" data-action="http://g.openibm.com/#q=" id="search_btn"></button>
 					</div>
-					<div id="list_search_engine" style="display: none" data-status="hidden">
-						<span data-key="baidu" data-align="百度搜索" data-action="https://www.baidu.com/s?wd=" class="baidu search_engine_icon" style="width: 30px"></span>
-						<span data-key="google" data-align="谷歌搜索(在墙内，我们的一大爱好就是搜集谷歌ip)" data-action="http://g.openibm.com/#q=" class="google search_engine_icon" style="width: 30px"></span>
-						<span data-key="youku" data-align="优酷搜索" data-action="http://www.soku.com/search_video/q_" class="youku search_engine_icon"></span>
-						<span data-key="amazon" data-align="亚马逊搜索" data-action="http://www.amazon.cn/s/field-keywords=" class="amazon search_engine_icon"></span>
-						<span data-key="wiki" data-align="维基百科搜索" data-action="http://zh.wikipedia.org/wiki/" class="wiki search_engine_icon"></span>
-						<span data-key="taobao" data-align="淘宝搜索" data-action="http://s.taobao.com/search?q=" class="taobao search_engine_icon"></span>
-						<span data-key="tmall" data-align="天猫搜索" data-action="http://list.tmall.com/search_product.htm?q=" class="tmall search_engine_icon"></span>
+					<div id="list_search_engine" style="display: none">
+						<span data-key="baidu" data-align="我想去搜索之度娘" data-action="https://www.baidu.com/s?wd=" class="baidu search_engine_icon" style="width: 30px"></span>
+						<span data-key="google" data-align="我想去搜索之谷歌(在墙内，我们的一大爱好就是搜集谷歌ip)" data-action="http://g.openibm.com/#q=" class="google search_engine_icon" style="width: 30px"></span>
+						<span data-key="youku" data-align="我想去看视频之优酷" data-action="http://www.soku.com/search_video/q_" class="youku search_engine_icon"></span>
+						<span data-key="amazon" data-align="我想去购物之亚马逊" data-action="http://www.amazon.cn/s/field-keywords=" class="amazon search_engine_icon"></span>
+						<span data-key="wiki" data-align="我想去了解之维基百科" data-action="http://zh.wikipedia.org/wiki/" class="wiki search_engine_icon"></span>
+						<span data-key="taobao" data-align="我想去购物之淘宝" data-action="http://s.taobao.com/search?q=" class="taobao search_engine_icon"></span>
+						<span data-key="tmall" data-align="我想去购物之天猫" data-action="http://list.tmall.com/search_product.htm?q=" class="tmall search_engine_icon"></span>
 					</div>
 				</div>
 
@@ -286,26 +390,147 @@
 		</div>
 
 		<!--网址展示-->
-		<div class="webAddressDiv">
+		<div id="webAddressDiv">
 			<div class="w2sm_width">
-
-				<!--标题-->
-				<div class="title">
-					<div class="title_content">我想要</div>
-					<div class="title_content_line"/>
+				<div class="row">
+					<div class="heading-section col-md-12 text-center">
+						<h2 style="color: #f26849;font-family: '幼圆';font-size: 50px">我想要</h2>
+						<p>请选择你此刻最想要的</p>
+					</div>
 				</div>
 
-				<!--导航类-->
-				<div></div>
+				<div class="row">
+					<div class="w2sm_type col-md-4 col-sm-6">
+						<div class="w2sm_type_vision">
+							<img src="__PUBLIC__/images/type/sjtu.jpg" alt="">
+							<div class="w2sm_type_overlay sjtu" data-key="sjtu" >
+								<h2>乐在交大</h2>
+								<!--<p>我想看看交大才子们的视界长啥样.</p>-->
+								<p>我对互联网视界充满好奇，我想要看更多</p>
+								<p>我有点二，交大有很多优秀的网站，但我总记不住，所以干脆全列出来</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="w2sm_type col-md-4 col-sm-6">
+						<div class="w2sm_type_vision">
+							<img src="__PUBLIC__/images/type/coder.jpg" alt="">
+							<div class="w2sm_type_overlay coder" data-key="coder">
+								<h2>编程</h2>
+								<p>我平凡，但有改变世界的理想。</p>
+								<p>我热爱编程，同时搜集了很多超赞的网站来提高我的编程水平</p>
+								<!--<p>我想成为一名低调又牛叉的编程艺术家</p>-->
+							</div>
+						</div>
+					</div>
+
+					<div class="w2sm_type col-md-4 col-sm-6">
+						<div class="w2sm_type_vision">
+							<img src="__PUBLIC__/images/type/zhai.jpg" alt="">
+							<div class="w2sm_type_overlay zhai" data-key="zhai">
+								<h2>宅着</h2>
+								<p>到了周末，我就爱宅着。</p>
+								<p>优质的电影音乐...这些字节流让我很享受安安静静的日子</p>
+								<p>对了，还有外卖</p>
+								<!--<p>我想以一种优雅浪漫的姿态宅在房间</p>-->
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="w2sm_type col-md-4 col-sm-6">
+						<div class="w2sm_type_vision">
+							<img src="__PUBLIC__/images/type/fun.jpg" alt="">
+							<div class="w2sm_type_overlay fun" data-key="fun">
+								<h2>找点意思</h2>
+								<p>日子总归是平淡，但我不甘平淡。</p>
+								<p>我试图去发现生活的美好--阅读、骑行、厨艺...</p>
+								<!--<p>我想给平淡的生活加点酱油.</p>-->
+							</div>
+						</div>
+					</div>
 
 
+					<div class="w2sm_type col-md-4 col-sm-6">
+						<div class="w2sm_type_vision">
+							<img src="__PUBLIC__/images/type/wenyi.jpg" alt="">
+							<div class="w2sm_type_overlay wenyi" data-key="wenyi">
+								<h2>不文艺</h2>
+								<p>作为普通青年，我不敢说自己文艺。</p>
+								<p>我只知道，文艺的东西总能带给我温暖</p>
+								<!--<p>我想安安静静的做个文艺青年，所以，我不文艺.</p>-->
+							</div>
+						</div>
+					</div>
+
+					<div class="w2sm_type col-md-4 col-sm-6">
+						<div class="w2sm_type_vision">
+							<img src="__PUBLIC__/images/type/shopping.jpg" alt="">
+							<div class="w2sm_type_overlay shopping" data-key="shopping">
+								<h2>买买买</h2>
+								<p>大家都喜欢淘宝，我也喜欢。</p>
+								<p>但我还有比淘宝更加优质而丰富的选择。</p>
+								<!--<p>作为土豪，我偶尔也想要任性一次。不要说我俗，在我眼里，每件商品都算艺术品。</p>-->
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="w2sm_type col-md-4 col-sm-6">
+						<div class="w2sm_type_vision">
+							<img src="__PUBLIC__/images/type/job.jpg" alt="">
+							<div class="w2sm_type_overlay job" data-key="job">
+								<h2>找工作</h2>
+								<p>找工作、实习或创业，并不难。</p>
+								<p>关键在于去哪“找”</p>
+								<!--<p>工作或实习，助我上人生巅峰吧！</p>-->
+							</div>
+						</div>
+					</div>
+
+					<!--<div class="w2sm_type col-md-4 col-sm-6">-->
+						<!--<div class="w2sm_type_vision">-->
+							<!--<img src="__PUBLIC__/images/Type/scholar.png" alt="">-->
+							<!--<div class="w2sm_type_overlay">-->
+								<!--<h2>搞学术</h2>-->
+								<!--<p></p>-->
+								<!--&lt;!&ndash;<p>我想随便搞搞学术。学术，好吃吗？</p>&ndash;&gt;-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
+
+				</div>
+
+				</div> <!-- /.row -->
+			</div> <!-- /.container -->
+		</div> <!-- /#portfolio -->
 
 
-			</div>
-		</div>
+<script>
+	$(function(){
 
-	</div>
+		var searchDivOffset = $("#searchDiv").offset().top;
+		$(window).scroll(function(){
+			$('#searchDiv').toggleClass('scrolled', $(this).scrollTop() > searchDivOffset-50);
+			$('#webAddressDiv').toggleClass('scrollWebAddress', $(this).scrollTop() > searchDivOffset-50);
+		});
 
+		$("#more").mouseover(function() {
+			$(this).toggleClass("animated rubberBand")
+			//$(this).attr("class", "animated rubberBand");
+		})
 
+		$("#start_button,#more").click(function() {
+			$('body,html').animate({
+				scrollTop:searchDivOffset
+			},1000);
+			$("#searchDiv").css("opacity", "0.91")
+			return false;
+		});
+	})
+</script>
 
 </body>

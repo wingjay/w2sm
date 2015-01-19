@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>为好奇者</title>
+	<meta name="author" content="Alvaro Trigo Lopez" />
+	<meta name="description" content="fullPage fixed header and footer." />
+	<meta name="keywords"  content="fullpage,jquery,demo,screen,fixed, header,footer, absolute, positioned,css" />
+	<meta name="Resource-type" content="Document" />
+
+
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/jquery.fullPage.css" />
+	<link rel="stylesheet" type="text/css" href="Public/css/fs.gridlock.css" />
+	<link rel="stylesheet" type="text/css" href="Public/css/jquery.fs.selecter.css" />
+	<style>
+
+		/* Style for our header texts
+		* --------------------------------------- */
+		h1{
+			font-size: 5em;
+			font-family: arial,helvetica;
+			color: #fff;
+			margin:0;
+			padding:0;
+		}
+		.intro p{
+			color: #fff;
+		}
+
+		/* Centered texts in each section
+		* --------------------------------------- */
+		.section{
+			text-align:center;
+		}
+		/* Fixed header and footer.
+		* --------------------------------------- */
+		#header, #footer{
+			position:fixed;
+			height: 80px;
+			display:block;
+			width: 100%;
+			background: #2ABB9B;
+			z-index:9;
+			text-align:center;
+			color: #f2f2f2;
+			padding: 15px 0 0 0;
+		}
+
+		#header{
+			top:0px;
+		}
+		#footer{
+			bottom:0px;
+		}
+
+
+		/* Bottom menu
+		* --------------------------------------- */
+		#infoMenu {
+			bottom: 80px;
+		}
+		#infoMenu li a {
+			color: #fff;
+			z-index: 999;
+		}
+		/* Search
+		* --------------------------------------- */
+		#searchTitle {
+			margin-top: 10px;
+		}
+		#searchBox {
+			position: absolute;
+			top: 10%;
+			left: 35%;
+		}
+		#searchContent {
+			float: left;
+			height: 50px;
+			width: 100%;
+			background-color: #ffffff;
+			border: 0px;
+			padding: 5px 10px;
+			font-size: 20px;
+			font-family: "华文细黑","Segoe UI";
+		}
+		#searchContent:focus {
+			outline:medium;
+		}
+		#search_engine {
+			float: left;
+			height: 40px;
+			margin-top: 10px;
+			cursor: pointer;
+		}
+		#search_btn {
+			float: left;
+			height: 40px;
+			width: 100%;
+			margin-top: 10px;
+			background: url("/Public/images/searct_btn.png") no-repeat;
+			border: 0px;
+			cursor: pointer;
+		}
+		#search_btn:focus {
+			outline:medium;
+		}
+		#list_search_engine {
+			float: left;
+			height: 65px;
+			width: 510px;
+			margin-left: -42px;
+			margin-top: 4px;
+			background: url("/Public/images/search/search_tool_bg.png") no-repeat;
+		}
+		#list_search_engine span {
+			float: left;
+			margin-left: 19px;
+			cursor: pointer;
+			margin-top: 20px;
+			height: 40px;
+			width: 40px;
+		}
+		/* slogan
+		* --------------------------------------- */
+		.slogan {
+			text-align: center;
+			color: #ffffff;
+		}
+	</style>
+
+	<!--[if IE]>
+	<script type="text/javascript">
+		var console = { log: function() {} };
+	</script>
+	<![endif]-->
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.slimscroll.min.js"></script>
+
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.fullPage.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.fs.selecter.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+				anchors: ['firstPage', 'secondPage', '3rdPage'],
+				sectionsColor: ['#36D7B7', '#1BBC9B', '#7E8F7C'],
+				css3: true
+			});
+
+			$("select").selecter({
+				label: "Select An Item"
+			});
+
+			var $searchEngine = $("#search_engine");
+			var $searchContent = $("#searchContent");
+			var $searchBtn = $("#search_btn");
+
+			var $listSearchEngine = $("#list_search_engine");
+			$searchEngine.click(function() {
+				if($listSearchEngine.is(":visible")) {
+					$listSearchEngine.fadeOut();
+				}else {
+					$listSearchEngine.fadeIn();
+				}
+			});
+
+			var $searchEngineIcons = $(".search_engine_icon");
+			$searchEngineIcons.each(function(){
+				var $icon = $(this);
+				var engineType = $icon.data("key");
+				var engineTxt = $icon.data("align");
+				var engineUrl = $icon.data("action");
+
+				$icon.click(function(){
+					$searchContent.attr("placeholder",engineTxt);
+					var newSrc =$(this).find('img').attr("src");
+					$searchEngine.find("img").attr("src", newSrc);
+					$searchBtn.data("action", engineUrl);
+					$listSearchEngine.hide();
+				})
+			});
+
+			$searchContent.keydown(function(){
+				if(event.keyCode == 13) { //回车键
+					doSearch();
+				}
+			})
+			$searchBtn.click(function(){
+				doSearch();
+			});
+
+			function doSearch() {
+				var $searchEngineUrl = $searchBtn.data("action");
+				$searchContentUrl = $searchEngineUrl + $searchContent.val();
+				window.open($searchContentUrl);
+			}
+		});
+	</script>
+
+
+</head>
+<body class="gridlock">
+
+<div id="header">
+	<div class="row" style="display: none">
+		<!--电脑一个row分成12份，平板6份，手机3份-->
+		<div class="desktop-4 tablet-2 mobile-1" style="background-color: #639132">
+			<div class="row">
+				<div class="desktop-1 tablet-1" style="background-color: #119000"> a</div>
+				<div class="desktop-1 tablet-1" style="background-color: #119000"> b</div>
+				<div class="desktop-1 tablet-1" style="background-color: #119000"> c</div>
+				<div class="desktop-1 tablet-1" style="background-color: #119000"> d</div>
+				<div class="desktop-8 tablet-2" style="background-color: #119000"> e</div>
+			</div>
+
+		</div>
+		<div class="desktop-8 tablet-4 mobile-2" style="background-color: #adf123">
+			Content
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="desktop-3 tablet-1 mobile-3" id="searchTitle">
+			<div>
+				<img src="/Public/images/search_title.png">
+			</div>
+		</div>
+		<div class="desktop-8 tablet-5 mobile-3">
+			<div class="row">
+				<div class="desktop-1 tablet-1 mobile-3 centered" id="search_engine">
+					<span class="google">
+						<img src="/Public/images/search/google.png"/>
+					</span>
+				</div>
+				<div class="desktop-10 tablet-4 mobile-3">
+					<input type="text" id="searchContent" placeholder="点击左边图标即可切换搜索引擎哦~">
+				</div>
+				<div class="desktop-1 tablet-1 mobile-3">
+					<span>
+						<button type="submit" data-action="http://g.openibm.com/#q=" id="search_btn"></button>
+					</span>
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div id="list_search_engine" style="display: none">
+				<span data-key="baidu" data-align="我想去搜索之度娘"
+				      data-action="https://www.baidu.com/s?wd=" class=" baidu search_engine_icon" style="width: 30px">
+					<img src="/Public/images/search/baidu.png"/>
+		        </span>
+				<span data-key="google" data-align="我想去搜索之谷歌"
+				      data-action="http://g.openibm.com/#q=" class="google search_engine_icon" style="width: 30px">
+					<img src="/Public/images/search/google.png"/>
+		        </span>
+				<span data-key="youku" data-align="我想去看视频之优酷"
+				      data-action="http://www.soku.com/search_video/q_" class="youku search_engine_icon">
+					<img src="/Public/images/search/youku.png"/>
+		        </span>
+				<span data-key="amazon" data-align="我想去购物之亚马逊"
+				      data-action="http://www.amazon.cn/s/field-keywords=" class="amazon search_engine_icon">
+					<img src="/Public/images/search/amazon.png"/>
+		        </span>
+				<span data-key="wiki" data-align="我想去了解之维基百科"
+				      data-action="http://zh.wikipedia.org/wiki/" class="wiki search_engine_icon">
+					<img src="/Public/images/search/wiki.png"/>
+		        </span>
+				<span data-key="taobao" data-align="我想去购物之淘宝"
+				      data-action="http://s.taobao.com/search?q=" class="taobao search_engine_icon">
+					<img src="/Public/images/search/taobao.png"/>
+		        </span>
+				<span data-key="tmall" data-align="我想去购物之天猫"
+				      data-action="http://list.tmall.com/search_product.htm?q=" class="tmall search_engine_icon">
+					<img src="/Public/images/search/tmall.png"/>
+		        </span>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+</div>
+<div id="footer" style="display: none">Footer</div>
+
+<div id="fullpage">
+	<div class="section " id="section0">
+		<div class="row">
+			<!--slogan-->
+			<div class="slogan" style="margin-top:50px;">
+				<span style="font-size: 40px;font-family: '幼圆';">
+					你甚至想象不到，区区一个导航，竟能让你的视界变得如此优雅
+				</span>
+			</div>
+			<div class="slogan" style="margin-top:20px;">
+				<span style="font-size: 20px;font-family: 'Segoe UI Light','幼圆';">
+					WANT TO SEE MORE . ME ，满足更多好奇心
+				</span>
+			</div>
+		</div>
+
+		<div class="row" style="margin-top:50px;padding-bottom: 50px">
+			<div class="desktop-3 tablet-3 mobile-3" style="background-color: #204d74;height: 300px"></div>
+			<div class="desktop-3 tablet-3 mobile-3" style="background-color: #145ab3;height: 300px"></div>
+			<div class="desktop-3 tablet-3 mobile-3" style="background-color: #6622aa;height: 300px"></div>
+			<div class="desktop-3 tablet-3 mobile-3" style="background-color: #1211ab;height: 300px"></div>
+		</div>
+		<div class="row">
+			<div class="desktop-3 tablet-3 mobile-3" style="background-color: #667464;height: 300px"></div>
+			<div class="desktop-3 tablet-3 mobile-3" style="background-color: #429214;height: 300px"></div>
+			<div class="desktop-3 tablet-3 mobile-3" style="background-color: #2563ab;height: 300px"></div>
+			<div class="desktop-3 tablet-3 mobile-3" style="background-color: #204d74;height: 300px"></div>
+		</div>
+
+
+	</div>
+	<div class="section" id="section1">
+		<div class="slide" id="slide1">
+			<div class="intro">
+				<h1>How to do it</h1>
+				<p>
+					You will need to place your header and footer outside the plugin's wrapper.
+					This way it won't move on scrolling. Take a look at the source code of this page.
+				</p>
+			</div>
+		</div>
+
+		<div class="slide" id="slide2">
+			<h1>Slide 2</h1>
+			<!--<img src="imgs/iphone-blue.png" alt="iphone" id="iphone-two" />-->
+		</div>
+
+	</div>
+	<div class="section" id="section2">
+		<div class="intro">
+			<h1>Enjoy it</h1>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>
