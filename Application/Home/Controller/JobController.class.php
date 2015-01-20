@@ -8,9 +8,10 @@ use Think\Controller;
 class JobController extends BaseController {
 
 	public function index(){
+		$type = C("job");
 		//先获取所有链接类别
 		$category = D('Category');
-		$linkType = $category->findAll();
+		$linkType = $category->findAll($type);
 
 		//获取已有超链接
 		$link = D('Link');

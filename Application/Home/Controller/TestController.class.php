@@ -5,6 +5,7 @@ use Think\Model;
 class TestController extends BaseController {
 	//测试
 	public function index(){
+
 		//先获取所有链接类别
 		$category = D('Category');
 		$linkType = $category->findAll();
